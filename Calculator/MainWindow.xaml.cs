@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -11,10 +12,11 @@ namespace Calculator
 	{
 
 		// Initial size of the MainWindow and its elements
-		Size windowInitialSize = new Size(300, 400);
-		int tbDisplayFontSize = 36;
-		int tbHistoryFontSize = 12;
-		int buttonsFontSize = 20;
+		Size windowInitialSize = new Size(300.0, 400.0);
+		double tbDisplayInitialFontSize = 36.0;
+		double tbHistoryInitialFontSize = 12.0;
+		double buttonsInitialFontSize = 20.0;
+		Thickness elementsMargin = new Thickness(1.0);
 
 		// Math operations that the app is ablo to do
 		enum Operation { Addition, Subtraction, Multiplication, Division }
@@ -29,15 +31,17 @@ namespace Calculator
 		{
 			InitializeComponent();
 
-			// Assign initial sizes
+			// Set initial window size
+			// This also calls mainWindow_SizeChanged that sets font size of all elements on the window
 			this.Height = windowInitialSize.Height;
-			this.Width = windowInitialSize.Width;
-			tbDisplay.FontSize = tbDisplayFontSize;
-			tbHistory.FontSize = tbHistoryFontSize;
-			foreach (var element in mainGrid.Children)  // for all buttons on the form
+			this.Width = windowInitialSize.Width;  
+
+			// Set margin for all elements
+			tbDisplay.Margin = elementsMargin;
+			tbHistory.Margin = elementsMargin;
+			foreach (var button in mainGrid.Children.OfType<Button>())
 			{
-				if (element is Button)
-					(element as Button).FontSize = buttonsFontSize;
+				button.Margin = elementsMargin;
 			}
 
 			numberInputFinished = true;
@@ -58,14 +62,11 @@ namespace Calculator
 		{
 			if (e.HeightChanged)
 			{
-				tbDisplay.FontSize = Math.Round(e.NewSize.Height / windowInitialSize.Height * tbDisplayFontSize);
-				tbHistory.FontSize = Math.Round(e.NewSize.Height / windowInitialSize.Height * tbHistoryFontSize);
-				foreach (var element in mainGrid.Children)
+				tbDisplay.FontSize = Math.Round(e.NewSize.Height / windowInitialSize.Height * tbDisplayInitialFontSize);
+				tbHistory.FontSize = Math.Round(e.NewSize.Height / windowInitialSize.Height * tbHistoryInitialFontSize);
+				foreach (var button in mainGrid.Children.OfType<Button>())
 				{
-					if (element is Button)
-					{
-						(element as Button).FontSize = Math.Round(e.NewSize.Height / windowInitialSize.Height * buttonsFontSize);
-					}
+					button.FontSize = Math.Round(e.NewSize.Height / windowInitialSize.Height * buttonsInitialFontSize);
 				}
 			}
 		}
