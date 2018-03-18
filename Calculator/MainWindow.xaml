@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:Calculator"
         mc:Ignorable="d"
         Title="Calculator" 
+		Width="300"
 		MinWidth="150" 
+		Height="400"
 		MinHeight="200" 
 		SizeChanged="mainWindow_SizeChanged">
 	
@@ -43,9 +45,10 @@
 		<Button Grid.Row="5" Grid.Column="1" Content="2" x:Name="btn2" Click="btnNumber_Click"/>
 		<Button Grid.Row="5" Grid.Column="2" Content="3" x:Name="btn3" Click="btnNumber_Click"/>
 		<Button Grid.Row="5" Grid.Column="3" Content="+" x:Name="btnAddition" Click="btnAddition_Click"/>
-		<Button Grid.Row="6" Grid.Column="0" Content="." x:Name="btnPoint" Click="btnPoint_Click"/>
+		<Button Grid.Row="6" Grid.Column="0" Content="+/-" x:Name="btnSign" Click="btnSign_Click"/>
 		<Button Grid.Row="6" Grid.Column="1" Content="0" x:Name="btn0" Click="btnNumber_Click"/>
-		<Button Grid.Row="6" Grid.Column="2" Content="=" x:Name="btnEqual" Grid.ColumnSpan="2" Click="btnEqual_Click"/>
+		<Button Grid.Row="6" Grid.Column="2" Content="." x:Name="btnPoint" Click="btnPoint_Click"/>
+		<Button Grid.Row="6" Grid.Column="3" Content="=" x:Name="btnEqual" Click="btnEqual_Click"/>
 		
 		<TextBox x:Name="tbDisplay" 
 				 Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" 

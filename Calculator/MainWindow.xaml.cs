@@ -18,7 +18,7 @@ namespace Calculator
 		double buttonsInitialFontSize = 20.0;
 		Thickness elementsMargin = new Thickness(1.0);
 
-		// Math operations that the app is ablo to do
+		// Math operations that the app is able to do
 		enum Operation { Addition, Subtraction, Multiplication, Division }
 
 		// Internal data to support calculation process
@@ -34,7 +34,7 @@ namespace Calculator
 			// Set initial window size
 			// This also calls mainWindow_SizeChanged that sets font size of all elements on the window
 			this.Height = windowInitialSize.Height;
-			this.Width = windowInitialSize.Width;  
+			this.Width = windowInitialSize.Width;
 
 			// Set margin for all elements
 			tbDisplay.Margin = elementsMargin;
@@ -104,6 +104,25 @@ namespace Calculator
 			numberInputFinished = false;
 		}
 
+		// Changes sign of the number on display 
+		private void btnSign_Click(object sender, RoutedEventArgs e)
+		{
+			//if (numberInputFinished)
+			//{
+			//	tbDisplay.Text = "-";
+			//}
+			//else 
+			if (tbDisplay.Text[0] == '-')
+			{
+				tbDisplay.Text = tbDisplay.Text.Remove(0, 1);
+			}
+			else
+			{
+				tbDisplay.Text = tbDisplay.Text.Insert(0, "-");
+			}
+			//numberInputFinished = false;
+		}
+
 		private void btnBackspace_Click(object sender, RoutedEventArgs e)
 		{
 			if (tbDisplay.Text.Length > 1)
@@ -133,7 +152,7 @@ namespace Calculator
 			Reset();
 		}
 
-		// Addition(+): remembers the first operand and waits for the second one
+		// Addition(+): saves the first operand and waits for the second one
 		private void btnAddition_Click(object sender, RoutedEventArgs e)
 		{
 			btnEqual_Click(sender, e); // when clicked right after the previous math expression was entered, calculates it and uses the result as a first operand for addition 
@@ -151,21 +170,10 @@ namespace Calculator
 			numberInputFinished = true;
 		}
 
-		// Subtraction (-) is twofold:
-		// it either adds a negative sign to the number going to be entered,
-		// or perform math operation (as other operators buttons do) remembering the first operand and waiting for the second one
+		// Subtraction (-): saves the first operand and waits for the second one
 		private void btnSubtraction_Click(object sender, RoutedEventArgs e)
 		{
-			// add a negative sign to the number going to be entered
-			if (numberInputFinished && !tbHistory.Text.EndsWith(" = "))
-			{
-				tbDisplay.Text = "-";
-				numberInputFinished = false;
-				return;
-			}
-
 			btnEqual_Click(sender, e); // when clicked right after the previous math expression was entered, calculates it and uses the result as a first operand for subtraction
-
 			try
 			{
 				operand1 = double.Parse(tbDisplay.Text);
@@ -180,7 +188,7 @@ namespace Calculator
 			numberInputFinished = true;
 		}
 
-		// Multiplication(*): remembers the first operand and waits for the second one
+		// Multiplication(*): saves the first operand and waits for the second one
 		private void btnMultiplication_Click(object sender, RoutedEventArgs e)
 		{
 			btnEqual_Click(sender, e); // when clicked right after the previous math expression was entered, calculates it and uses the result as a first operand for multiplication
@@ -198,7 +206,7 @@ namespace Calculator
 			numberInputFinished = true;
 		}
 
-		// Division(/): remembers the first operand and waits for the second one
+		// Division(/): saves the first operand and waits for the second one
 		private void btnDivision_Click(object sender, RoutedEventArgs e)
 		{
 			btnEqual_Click(sender, e); // when clicked right after the previous math expression was entered, calculates it and uses the result as a first operand for division
@@ -222,7 +230,7 @@ namespace Calculator
 			// 1,2) check if first operand and the operation were entered
 			// 3) if numberInputFinished == true, the user didn't even started to enter the second operand
 			// if it doesn't meet the abovementioned criteria, '=' button does nothing
-			if (operand1 != null && operation != null && numberInputFinished == false) 
+			if (operand1 != null && operation != null && numberInputFinished == false)
 			{
 				try
 				{
