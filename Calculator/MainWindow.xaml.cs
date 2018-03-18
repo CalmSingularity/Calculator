@@ -107,11 +107,6 @@ namespace Calculator
 		// Changes sign of the number on display 
 		private void btnSign_Click(object sender, RoutedEventArgs e)
 		{
-			//if (numberInputFinished)
-			//{
-			//	tbDisplay.Text = "-";
-			//}
-			//else 
 			if (tbDisplay.Text[0] == '-')
 			{
 				tbDisplay.Text = tbDisplay.Text.Remove(0, 1);
@@ -120,7 +115,6 @@ namespace Calculator
 			{
 				tbDisplay.Text = tbDisplay.Text.Insert(0, "-");
 			}
-			//numberInputFinished = false;
 		}
 
 		private void btnBackspace_Click(object sender, RoutedEventArgs e)
